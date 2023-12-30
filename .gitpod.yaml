@@ -1,0 +1,19 @@
+# Gitpod configuration for Rocket.Chat development.
+# See https://developer.rocket.chat/open-source-projects/server/server-environment-setup/gitpod
+
+# Please adjust to your needs (see https://www.gitpod.io/docs/introduction/learn-gitpod/gitpod-yaml)
+# and commit this file to your remote git repository to share the goodness with others.
+
+# Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
+
+# More on tasks: https://www.gitpod.io/docs/configure/workspaces/tasks
+tasks: 
+  - name: dev-server # terminal name
+    # before: Use this for tasks that need to run before init and before command. For example, customize the terminal or install global project dependencies.
+    # 1. switch to node.js ver 14.21.3
+    # 2. Install Meteor. Read required version form https://raw.githubusercontent.com/RocketChat/Rocket.Chat/develop/apps/meteor/.meteor/release
+    before: nvm install 14.21.3 && curl https://install.meteor.com/?release=$( curl -so- https://raw.githubusercontent.com/RocketChat/Rocket.Chat/develop/apps/meteor/.meteor/release | cut -d@ -f2) | sh
+    # init: Use this for heavy-lifting tasks such as downloading dependencies or compiling source code.
+    init: yarn run build
+    # command: Use this to start your database or development server.
+    command: yarn run dev
