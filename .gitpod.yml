@@ -13,7 +13,7 @@ tasks:
     env:
       # https://github.com/RocketChat/Rocket.Chat/blob/8da72776017a971bb02d27a6e1d602ec975eaf03/server/startup/initialData.coffee#L28
       # https://github.com/RocketChat/feature-requests/issues/778#issuecomment-1490827711
-      ADMIN_USERNAME: admin
+      # ADMIN_USERNAME: admin
       ADMIN_PASS: admin
       ADMIN_EMAIL: admin@example.com
       OVERWRITE_SETTING_Show_Setup_Wizard: completed
