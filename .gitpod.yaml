@@ -10,9 +10,17 @@
 tasks: 
   - name: dev-server # terminal name
     # before: Use this for tasks that need to run before init and before command. For example, customize the terminal or install global project dependencies.
-    # 1. switch to node.js ver 14.21.3
-    # 2. Install Meteor. Read required version form https://raw.githubusercontent.com/RocketChat/Rocket.Chat/develop/apps/meteor/.meteor/release
-    before: nvm install 14.21.3 && curl https://install.meteor.com/?release=$( curl -so- https://raw.githubusercontent.com/RocketChat/Rocket.Chat/develop/apps/meteor/.meteor/release | cut -d@ -f2) | sh
+    #
+    # To run multiple commands for a given task, you can use the | notation where each line below (make sure you indent 
+    # correctly) runs in sequence once the previous command terminates.
+    #
+    
+    # - switch to node.js ver 14.21.3
+    # - install Meteor. Read required version form https://raw.githubusercontent.com/RocketChat/Rocket.Chat/develop/apps/meteor/.meteor/release
+    before: | 
+      nvm install 14.21.3 &&
+      curl https://install.meteor.com/?release=$( curl -so- https://raw.githubusercontent.com/RocketChat/Rocket.Chat/develop/apps/meteor/.meteor/release | cut -d@ -f2) | sh &&
+      meteor --version
     # init: Use this for heavy-lifting tasks such as downloading dependencies or compiling source code.
     init: yarn run build
     # command: Use this to start your database or development server.
