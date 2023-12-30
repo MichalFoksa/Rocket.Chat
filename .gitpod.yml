@@ -27,15 +27,14 @@ tasks:
     # - install Meteor. Read required version form https://raw.githubusercontent.com/RocketChat/Rocket.Chat/develop/apps/meteor/.meteor/release
     # - create ROOT_URL variable - optional task
     before: |
-      nvm install 14.21.3 &&
-      curl https://install.meteor.com/?release=$( curl -so- https://raw.githubusercontent.com/RocketChat/Rocket.Chat/develop/apps/meteor/.meteor/release | cut -d@ -f2) | sh &&
-      meteor --version &&
+      nvm install 14.21.3
+      curl https://install.meteor.com/?release=$( curl -so- https://raw.githubusercontent.com/RocketChat/Rocket.Chat/develop/apps/meteor/.meteor/release | cut -d@ -f2) | sh
+      meteor --version
       export ROOT_URL=$(gp url 3000)
     # init: Use this for heavy-lifting tasks such as downloading dependencies or compiling source code.
     init: |
-      yarn install &&
+      yarn install
       yarn run build
     # command: Use this to start your database or development server.
     command: |
       yarn run dev
-
