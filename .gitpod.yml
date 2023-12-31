@@ -27,6 +27,8 @@ tasks:
     # - install Meteor. Read required version form https://raw.githubusercontent.com/RocketChat/Rocket.Chat/develop/apps/meteor/.meteor/release
     # - create ROOT_URL variable - optional task
     before: |
+      # Makes the bash script to print out every command before it is executed
+      trap 'echo "# LOG $(date) $BASH_COMMAND"' DEBUG
       nvm install 14.21.3
       curl https://install.meteor.com/?release=$( curl -so- https://raw.githubusercontent.com/RocketChat/Rocket.Chat/develop/apps/meteor/.meteor/release | cut -d@ -f2) | sh
       meteor --version
