@@ -40,3 +40,11 @@ tasks:
     # command: Use this to start your database or development server.
     command: |
       yarn run dev
+ports:
+  - name: Rocker.Chat web app
+    port: 3000
+    # onOpen: open-browser
+    onOpen: open-preview
+  - name: MongoDB HTTP native driver port
+    port: 3001
+    onOpen: ignore
