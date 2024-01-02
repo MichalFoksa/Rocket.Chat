@@ -10,7 +10,10 @@ type RoomTitleProps = {
 };
 
 const RoomTitle = ({ room }: RoomTitleProps): ReactElement => {
-	useDocumentTitle(room.name, false);
+	console.log("RoomTitle", "room", room);
+	// useDocumentTitle(room.name, false);
+	useDocumentTitle(room.name + (room.unread && room.unread > 0 ? ' (' + room.unread + ')' : ''), false);
+	// useDocumentTitle( room.name + room.avatarETag, false);
 
 	return (
 		<>
