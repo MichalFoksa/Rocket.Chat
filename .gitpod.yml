@@ -48,3 +48,9 @@ ports:
   - name: MongoDB HTTP native driver port
     port: 3001
     onOpen: ignore
+
+vscode:
+  extensions:
+    - donjayamanne.git-extension-pack
+#    - EditorConfig.EditorConfig
+#    - HashiCorp.terraform
