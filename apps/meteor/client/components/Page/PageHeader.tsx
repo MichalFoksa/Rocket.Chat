@@ -18,6 +18,8 @@ const PageHeader: FC<PageHeaderProps> = ({ children = undefined, title, onClickB
 	const [border] = useContext(PageContext);
 	const { isMobile } = useLayout();
 
+	console.log("PageHeader", "title", title);
+
 	useDocumentTitle(typeof title === 'string' ? title : undefined);
 
 	return (

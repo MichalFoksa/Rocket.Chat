@@ -7,8 +7,26 @@ import React from 'react';
 import { useRoomToolbox } from '../contexts/RoomToolboxContext';
 import HeaderIconWithRoom from './HeaderIconWithRoom';
 
+import { useSession } from '@rocket.chat/ui-contexts';
+
 const RoomTitle = ({ room }: { room: IRoom }): ReactElement => {
-	useDocumentTitle(room.name, false);
+	console.log("RoomTitle", "room", room);
+	
+	const unreadMessages = useSession('unread') as number | '' | '999+' | '•';
+	console.log("RoomTitle", "unreadMessages", unreadMessages);
+	
+	// useDocumentTitle(room.name, false);
+	useDocumentTitle(
+		room.name 
+		+ (room.unread && room.unread > 0 ? ' (' + room.unread + ')' : '')
+		+ ' [' + unreadMessages + ']'
+		,
+		// room.name + '(' + room.unread + '/' + unreadMessages + ')', 
+		// room.name + '(' + room.unread + '/' + unreadMessages + ')', 
+		false
+		// true
+	);
+	
 	const { openTab } = useRoomToolbox();
 
 	const handleOpenRoomInfo = useEffectEvent(() => {
