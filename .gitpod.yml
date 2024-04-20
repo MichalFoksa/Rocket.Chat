@@ -39,7 +39,8 @@ tasks:
       yarn run build
     # command: Use this to start your database or development server.
     command: |
-      yarn run dev
+      # yarn run dev # with `run dev` it gets stuck on `fuselage-ui-kit:dev`
+      yarn run dsv
 ports:
   - name: Rocker.Chat web app
     port: 3000
