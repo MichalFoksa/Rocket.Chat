@@ -11,22 +11,38 @@ import { useSession } from '@rocket.chat/ui-contexts';
 
 const RoomTitle = ({ room }: { room: IRoom }): ReactElement => {
 	console.log("RoomTitle", "room", room);
+
+	const getUnreadMessages = (): number => {
+		const unreadMessages = useSession('unread') as number | '' | '999+' | '•';
+		if (typeof unreadMessages !== 'number') {
+			return 0;
+		}
+		return  unreadMessages;
+	};
 	
-	const unreadMessages = useSession('unread') as number | '' | '999+' | '•';
-	console.log("RoomTitle", "unreadMessages", unreadMessages);
+	const allUnread = getUnreadMessages();
+	console.log("RoomTitle", "allUnread", allUnread);
+	const roomUnread = room.unread === undefined ? 0 : room.unread;
+	const otherUnread = allUnread - roomUnread;
 	
 	// useDocumentTitle(room.name, false);
 	useDocumentTitle(
-		room.name 
-		+ (room.unread && room.unread > 0 ? ' (' + room.unread + ')' : '')
-		+ ' [' + unreadMessages + ']'
-		,
-		// room.name + '(' + room.unread + '/' + unreadMessages + ')', 
-		// room.name + '(' + room.unread + '/' + unreadMessages + ')', 
+
+		// Room Title (room unread)
+		// Mark Watney (4)
+		// room.name  + (room.unread && room.unread > 0 ? ' (' + room.unread + ')' : ''),
+		// (room unread) Room Title
+		// (4) Mark Watney
+		(room.unread && room.unread > 0 ? '(' + room.unread + ') ' : '') + room.name,
+		// room.name + (roomUnread > 0 ? ' (' + roomUnread + ')' : '') + ' [' + otherUnread + ']',
+		// room.name + (otherUnread > 0 ? ' [' + otherUnread + ']' : '')
+		// Room Title [Unread Messages: X | Total Unread: Y]
+        // Mark Watney [ 0 | 4]
+		// room.name + ' [' + roomUnread + ' | ' + otherUnread + ']',
+		
 		false
-		// true
 	);
-	
+
 	const { openTab } = useRoomToolbox();
 
 	const handleOpenRoomInfo = useEffectEvent(() => {
@@ -65,5 +81,7 @@ const RoomTitle = ({ room }: { room: IRoom }): ReactElement => {
 		</HeaderTitleButton>
 	);
 };
+
+
 
 export default RoomTitle;
