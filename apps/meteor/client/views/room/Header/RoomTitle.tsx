@@ -12,7 +12,7 @@ import { useSession } from '@rocket.chat/ui-contexts';
 const RoomTitle = ({ room }: { room: IRoom }): ReactElement => {
 	console.log("RoomTitle", "room", room);
 
-	const getUnreadMessages = (): number => {
+	const getTotalUnreaddMessages = (): number => {
 		const unreadMessages = useSession('unread') as number | '' | '999+' | '•';
 		if (typeof unreadMessages !== 'number') {
 			return 0;
@@ -20,10 +20,10 @@ const RoomTitle = ({ room }: { room: IRoom }): ReactElement => {
 		return  unreadMessages;
 	};
 	
-	const allUnread = getUnreadMessages();
-	console.log("RoomTitle", "allUnread", allUnread);
+	const totalUnread = getTotalUnreaddMessages();
+	console.log("RoomTitle", "allUnread", totalUnread);
 	const roomUnread = room.unread === undefined ? 0 : room.unread;
-	const otherUnread = allUnread - roomUnread;
+	const otherUnread = totalUnread - roomUnread;
 	
 	// useDocumentTitle(room.name, false);
 	useDocumentTitle(
@@ -31,11 +31,20 @@ const RoomTitle = ({ room }: { room: IRoom }): ReactElement => {
 		// Room Title (room unread)
 		// Mark Watney (4)
 		// room.name  + (room.unread && room.unread > 0 ? ' (' + room.unread + ')' : ''),
+		
 		// (room unread) Room Title
 		// (4) Mark Watney
-		(room.unread && room.unread > 0 ? '(' + room.unread + ') ' : '') + room.name,
+		// (room.unread && room.unread > 0 ? '(' + room.unread + ') ' : '') + room.name,
+		
+		// Room Title (room unread) [other unread]
 		// room.name + (roomUnread > 0 ? ' (' + roomUnread + ')' : '') + ' [' + otherUnread + ']',
-		// room.name + (otherUnread > 0 ? ' [' + otherUnread + ']' : '')
+		
+		// [other unread] (room unread) Room Title
+		// (otherUnread > 0 ? '[' + otherUnread + '] ' : '') + (roomUnread > 0 ? '(' + roomUnread + ') ' : '') + room.name,
+
+		// [total unread] (room unread) Room Title
+		(totalUnread > 0 ? '[' + totalUnread + '] ' : '') + (roomUnread > 0 ? '(' + roomUnread + ') ' : '') + room.name,
+		
 		// Room Title [Unread Messages: X | Total Unread: Y]
         // Mark Watney [ 0 | 4]
 		// room.name + ' [' + roomUnread + ' | ' + otherUnread + ']',
