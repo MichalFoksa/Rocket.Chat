@@ -18,13 +18,16 @@ const useRouteTitleFocus = () => {
 };
 
 const DocumentTitleWrapper: FC = ({ children }) => {
-	console.log("DocumentTitleWrapper", "useUnreadMessages", useUnreadMessages());
+	console.log("DocumentTitleWrapper", "order", 2);
+	// console.log("DocumentTitleWrapper", "useUnreadMessages", useUnreadMessages());
 
 	// useDocumentTitle(useSetting<string>('Site_Name') || '', false);
 	// const { title, key } = useDocumentTitle(useUnreadMessages(), false);
 
 	// useDocumentTitle(useUnreadMessages(), false);
 	const { title, key } = useDocumentTitle(useSetting<string>('Site_Name') || '', false);
+
+	console.log("DocumentTitleWrapper", "key", key, "title", title);
 
 	const refocusRef = useRouteTitleFocus();
 

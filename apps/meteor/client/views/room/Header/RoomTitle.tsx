@@ -10,8 +10,9 @@ import HeaderIconWithRoom from './HeaderIconWithRoom';
 import { useSession } from '@rocket.chat/ui-contexts';
 
 const RoomTitle = ({ room }: { room: IRoom }): ReactElement => {
-	console.log("RoomTitle", "room", room);
-
+	console.log("RoomTitle", "order", 1);
+	// console.log("RoomTitle", "room", room);
+	
 	const getTotalUnreaddMessages = (): number => {
 		const unreadMessages = useSession('unread') as number | '' | '999+' | '•';
 		if (typeof unreadMessages !== 'number') {
@@ -21,7 +22,7 @@ const RoomTitle = ({ room }: { room: IRoom }): ReactElement => {
 	};
 	
 	const totalUnread = getTotalUnreaddMessages();
-	console.log("RoomTitle", "allUnread", totalUnread);
+	// console.log("RoomTitle", "totalUnread", totalUnread);
 	const roomUnread = room.unread === undefined ? 0 : room.unread;
 	const otherUnread = totalUnread - roomUnread;
 	
